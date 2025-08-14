@@ -2,17 +2,17 @@ import type { Route } from "../types";
 
 export const ROUTES: Route[] = [
   {
-    label: "Character",
+    label: "character",
     path: "/game/character",
     icon: "tabler:user-filled",
   },
   {
-    label: "Expedition",
+    label: "expedition",
     path: "/game/expedition",
     icon: "tabler:map",
   },
   {
-    label: "Shop",
+    label: "shop",
     path: "/game/shop",
     icon: "tabler:coins",
   },

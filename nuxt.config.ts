@@ -19,7 +19,15 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@pinia/nuxt",
     "nuxt-csurf",
+    "@nuxtjs/i18n",
   ],
+  i18n: {
+    defaultLocale: "en",
+    locales: [
+      { code: "en", name: "English", file: "en.json" },
+      { code: "pl", name: "Polish", file: "pl.json" },
+    ],
+  },
   eslint: {
     config: {
       standalone: false,

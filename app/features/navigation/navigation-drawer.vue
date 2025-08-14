@@ -11,7 +11,7 @@ import { ROUTES } from "./const";
       <li v-for="route in ROUTES" :key="route.path">
         <NuxtLink :to="route.path">
           <Icon :name="route.icon" size="24" />
-          {{ route.label }}
+          {{ $t(route.label) }}
         </NuxtLink>
       </li>
     </template>
