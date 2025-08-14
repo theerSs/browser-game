@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/test-utils",
     "@pinia/nuxt",
+    "nuxt-csurf",
   ],
   eslint: {
     config: {
