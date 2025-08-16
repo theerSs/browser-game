@@ -10,17 +10,23 @@ defineEmits(["attack", "block", "dodge"]);
 
 <template>
   <div class="flex flex-col gap-2 md:flex-row">
-    <button class="btn btn-primary" @click="$emit('attack')">
-      <Icon name="tabler:sword" size="24" />
-      {{ props.damageLabel }}
-    </button>
-    <button class="btn btn-accent" @click="$emit('block')">
-      <Icon name="tabler:shield" size="24" />
-      {{ props.defenceLabel }}
-    </button>
-    <button class="btn btn-warning" @click="$emit('dodge')">
-      <Icon name="tabler:fall" size="24" />
-      {{ props.dodgeLabel }}
-    </button>
+    <div class="tooltip" :data-tip="$t('attack')">
+      <button class="btn btn-primary w-full" @click="$emit('attack')">
+        <Icon name="tabler:sword" size="24" />
+        {{ props.damageLabel }}
+      </button>
+    </div>
+    <div class="tooltip" :data-tip="$t('block')">
+      <button class="btn btn-accent w-full" @click="$emit('block')">
+        <Icon name="tabler:shield" size="24" />
+        {{ props.defenceLabel }}
+      </button>
+    </div>
+    <div class="tooltip" :data-tip="$t('dodge')">
+      <button class="btn btn-warning w-full" @click="$emit('dodge')">
+        <Icon name="tabler:fall" size="24" />
+        {{ props.dodgeLabel }}
+      </button>
+    </div>
   </div>
 </template>

@@ -3,5 +3,8 @@
   "expedition": "Expedition",
   "shop": "Shop",
   "sign-out": "Sign Out",
-  "sign-in-with-github": "Sign In With Github"
+  "sign-in-with-github": "Sign In With Github",
+  "attack": "Attack",
+  "block": "Block",
+  "dodge": "Dodge"
 }
