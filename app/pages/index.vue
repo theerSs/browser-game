@@ -4,6 +4,6 @@ const authStore = useAuthStore();
 
 <template>
   <button class="btn btn-accent" @click="authStore.signIn">
-    Sign In With Github
+    {{ $t("sign-in-with-github") }}
   </button>
 </template>

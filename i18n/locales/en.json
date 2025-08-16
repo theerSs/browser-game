@@ -2,5 +2,6 @@
   "character": "Character",
   "expedition": "Expedition",
   "shop": "Shop",
-  "sign-out": "Sign Out"
+  "sign-out": "Sign Out",
+  "sign-in-with-github": "Sign In With Github"
 }
