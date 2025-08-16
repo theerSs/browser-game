@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Combat from "~/features/combat/combat.vue";
+</script>
+
 <template>
-  <div>EXPEDITION</div>
+  <Combat />
 </template>
