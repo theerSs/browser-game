@@ -2,9 +2,14 @@
   "character": "Character",
   "expedition": "Expedition",
   "shop": "Shop",
-  "sign-out": "Sign Out",
-  "sign-in-with-github": "Sign In With Github",
+  "sign_out": "Sign Out",
+  "sign_in_with_github": "Sign In With Github",
   "attack": "Attack",
   "block": "Block",
-  "dodge": "Dodge"
+  "dodge": "Dodge",
+  "hero": "Hero",
+  "enemy": "Enemy",
+  "skeleton_warrior": "Skeleton Warrior",
+  "cave_bat": "Cave Bat",
+  "goblin_rider": "Goblin Rider"
 }

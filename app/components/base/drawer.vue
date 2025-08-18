@@ -28,7 +28,7 @@ const props = defineProps<{ drawerId: string }>();
         <li class="text-red-500 justify-self-end">
           <NuxtLink to="/sign-out">
             <Icon size="24" name="tabler:logout-2" />
-            {{ $t("sign-out") }}
+            {{ $t("sign_out") }}
           </NuxtLink>
         </li>
       </ul>

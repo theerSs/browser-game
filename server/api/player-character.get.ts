@@ -4,22 +4,16 @@ export default defineEventHandler((): Character => {
   return {
     id: Math.random().toString(),
     image: "player",
-    name: "Antont",
-    level: 15,
+    name: "Anton",
+    level: 2,
     stats: {
-      damage: [30, 90],
-      defence: 120,
-      dex: 20,
+      damage: [5, 9],
+      defence: 3,
+      dex: 4,
     },
     resources: {
-      health: {
-        current: 60,
-        max: 120,
-      },
-      energy: {
-        current: 10,
-        max: 130,
-      },
+      energy: { current: 15, max: 15 },
+      health: { current: 30, max: 30 },
     },
   };
 });

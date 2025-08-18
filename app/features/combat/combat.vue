@@ -13,10 +13,11 @@ const { data: enemy } = await useCsrfFetch<Character>("/api/enemy-chracter");
         :image="player.image"
         :level="player.level"
         :resources="player.resources"
+        :img-alt="$t('hero')"
       />
       <CombatActions
         :damage-label="`${player.stats.damage[0]} - ${player.stats.damage[1]}`"
-        :defence-label="`${player.stats.defence / 10}%`"
+        :defence-label="`${player.stats.defence}%`"
         :dodge-label="`${player.stats.dex - enemy.stats.dex}%`"
       />
     </div>
@@ -26,6 +27,7 @@ const { data: enemy } = await useCsrfFetch<Character>("/api/enemy-chracter");
       :image="enemy.image"
       :level="enemy.level"
       :resources="enemy.resources"
+      :img-alt="$t('enemy')"
     />
   </div>
 </template>

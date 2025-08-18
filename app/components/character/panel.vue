@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Character } from "~~/shared/types/character";
 
-const props = defineProps<Pick<Character, "image" | "level" | "name" | "resources">>();
+const props = defineProps<Pick<Character, "image" | "level" | "name" | "resources"> & { imgAlt: string }>();
 </script>
 
 <template>
@@ -10,12 +10,12 @@ const props = defineProps<Pick<Character, "image" | "level" | "name" | "resource
       <img
         class="object-contain w-1/2 min-w-32 rounded-md"
         :src="`/characters/${props.image}.png`"
-        alt="Player character"
+        :alt="props.imgAlt"
       >
     </figure>
     <div class="card-body items-center">
       <h2 class="card-title">
-        {{ props.name }} - {{ props.level }}
+        {{ $t(props.name) }} - {{ props.level }}
       </h2>
       <div class="container">
         <CharacterResourceBar

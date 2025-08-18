@@ -2,9 +2,14 @@
   "character": "Bohater",
   "expedition": "Wyprawa",
   "shop": "Sklep",
-  "sign-out": "Wyloguj",
-  "sign-in-with-github": "Zaloguj się z Github",
+  "sign_out": "Wyloguj",
+  "sign_in_with_github": "Zaloguj się z Github",
   "attack": "Atak",
   "block": "Obrona",
-  "dodge": "Unik"
+  "dodge": "Unik",
+  "enemy": "Przeciwnik",
+  "hero": "Bohater",
+  "skeleton_warrior": "Szkielet Wojownik",
+  "goblin_rider": "Goblin Najeźdźca",
+  "cave_bat": "Nietoperz Jaskiniowy"
 }

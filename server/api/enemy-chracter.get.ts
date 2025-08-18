@@ -1,25 +1,7 @@
-import type { Character } from "~~/shared/types/character";
+import type { EnemyCharacter } from "~~/shared/types";
 
-export default defineEventHandler((): Character => {
-  return {
-    id: Math.random().toString(),
-    image: "goblin",
-    name: "Goblin warrior",
-    level: 15,
-    stats: {
-      damage: [15, 65],
-      defence: 120,
-      dex: 15,
-    },
-    resources: {
-      health: {
-        current: 60,
-        max: 120,
-      },
-      energy: {
-        current: 10,
-        max: 130,
-      },
-    },
-  };
+import { ENEMIES } from "~~/shared/const";
+
+export default defineEventHandler((): EnemyCharacter => {
+  return ENEMIES[0];
 });
