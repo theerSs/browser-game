@@ -11,5 +11,6 @@
   "enemy": "Enemy",
   "skeleton_warrior": "Skeleton Warrior",
   "cave_bat": "Cave Bat",
-  "goblin_rider": "Goblin Rider"
+  "goblin_rider": "Goblin Rider",
+  "heal": "Heal"
 }

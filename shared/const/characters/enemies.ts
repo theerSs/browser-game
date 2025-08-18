@@ -1,10 +1,10 @@
 import type { EnemyCharacter } from "~~/shared/types";
 
 import { Enemy } from "~~/shared/enums/enemy";
+import _ from "lodash";
 
-export const ENEMIES: EnemyCharacter[] = [
-  {
-    id: Enemy.BAT,
+const ENEMIES: Record<Enemy, EnemyCharacter> = {
+  [Enemy.BAT]: {
     image: "bat",
     name: "cave_bat",
     level: 1,
@@ -19,8 +19,7 @@ export const ENEMIES: EnemyCharacter[] = [
     },
     loot: ["bat_wing", "tiny_claw"],
   },
-  {
-    id: Enemy.SKELETON,
+  [Enemy.SKELETON]: {
     image: "skeleton",
     name: "skeleton_warrior",
     level: 3,
@@ -35,8 +34,7 @@ export const ENEMIES: EnemyCharacter[] = [
     },
     loot: ["bone", "rusty_sword"],
   },
-  {
-    id: Enemy.GOBLIN,
+  [Enemy.GOBLIN]: {
     image: "goblin",
     name: "goblin_rider",
     level: 2,
@@ -51,4 +49,8 @@ export const ENEMIES: EnemyCharacter[] = [
     },
     loot: ["goblin_ear", "coin_pouch"],
   },
-];
+} as const;
+
+export function getEnemy(enemyId: Enemy): EnemyCharacter {
+  return _.cloneDeep(ENEMIES[enemyId]);
+}
