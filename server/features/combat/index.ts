@@ -1,2 +1,1 @@
-export { COMBAT_CACHE } from "./const/cache";
-export { handleCombatAction } from "./engine";
+export { default as combatHandler } from "./socket";

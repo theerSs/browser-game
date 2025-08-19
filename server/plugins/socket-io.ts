@@ -3,7 +3,7 @@ import type { NitroApp } from "nitropack";
 import { Server as Engine } from "engine.io";
 import { Server } from "socket.io";
 
-import { combatHandler } from "../sockets";
+import { combatHandler } from "../features/combat";
 
 export default defineNitroPlugin((nitroApp: NitroApp) => {
   const engine = new Engine();
