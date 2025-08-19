@@ -1,6 +1,7 @@
 import type { Character } from "./character";
 
 export type PlayerCharacter = Character & {
+  id: string;
   inventory: InventoryItem[];
 };
 

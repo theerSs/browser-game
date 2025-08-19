@@ -69,9 +69,14 @@ export default function combatHandler(io: Server) {
         return emitError(socket, "invalid_status", "combat_not_active");
       }
 
-      handleCombatAction(combat, action);
+      const actionSuccess = handleCombatAction(combat, action);
 
-      io.to(combatId).emit("combat:update", combat);
+      if (actionSuccess) {
+        io.to(combatId).emit("combat:update", combat);
+      }
+      else {
+        emitError(socket, "no_action", "action_not_found");
+      }
     });
 
     socket.on("combat:continue", (combatId: string) => {
