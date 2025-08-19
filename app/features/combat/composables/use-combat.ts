@@ -6,12 +6,18 @@ import { CombatLocation } from "~~/shared/enums/combat-location";
 import { useSocket } from "~/composables/use-socket";
 
 export function useCombat() {
+  const alertStore = useAlertStore();
   const combatState = ref<CombatState | null>(null);
   const socket: Socket<CombatEvents> = useSocket();
 
   function handleCombatAction(action: CombatAction) {
     if (!combatState.value) {
-      throw new Error("no_active_combat");
+      alertStore.setAlert({
+        type: "error",
+        message: "no_active_combat",
+      });
+      navigateTo("/character");
+      return;
     }
 
     socket.emit("combat:action", combatState.value.id, action);
@@ -24,7 +30,10 @@ export function useCombat() {
   });
 
   socket.on("combat:error", (error) => {
-    throw new Error(error.message);
+    alertStore.setAlert({
+      type: "error",
+      message: error.message,
+    });
   });
 
   return { combatState, handleCombatAction };

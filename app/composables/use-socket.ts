@@ -34,6 +34,7 @@ export function useSocket() {
   onBeforeUnmount(() => {
     socket.off("connect", onConnect);
     socket.off("disconnect", onDisconnect);
+    socket.close();
   });
 
   return socket;
