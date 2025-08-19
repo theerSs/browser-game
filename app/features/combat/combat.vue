@@ -10,14 +10,6 @@ const dodgeChance = computed(() => {
     return "";
   return `${combatState.value.player.stats.dex - combatState.value.enemy.stats.dex}%`;
 });
-const potionsAmount = computed(() => {
-  const potion = combatState.value?.player.inventory.find(({ id }) => id === "potion");
-  if (!potion) {
-    return 0;
-  }
-
-  return potion.amount;
-});
 </script>
 
 <template>
@@ -34,7 +26,7 @@ const potionsAmount = computed(() => {
         :damage-label="damageRange"
         :defence-label="`${combatState.player.stats.defence}%`"
         :dodge-label="dodgeChance"
-        :potions-amount="potionsAmount"
+        :potions-amount="combatState.player.inventory.potions.health.amount"
         @action-click="handleCombatAction"
       />
     </div>
