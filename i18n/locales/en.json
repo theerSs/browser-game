@@ -12,5 +12,10 @@
   "skeleton_warrior": "Skeleton Warrior",
   "cave_bat": "Cave Bat",
   "goblin_rider": "Goblin Rider",
-  "heal": "Heal"
+  "heal": "Heal",
+  "no_active_combat": "No active combat.",
+  "invalid_combat_location": "Invalid combat location",
+  "no_enemy_found": "No enemy found",
+  "combat_not_found": "Combat not found",
+  "action_not_found": "Action not found"
 }

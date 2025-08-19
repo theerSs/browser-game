@@ -12,5 +12,10 @@
   "skeleton_warrior": "Szkielet Wojownik",
   "goblin_rider": "Goblin Najeźdźca",
   "cave_bat": "Nietoperz Jaskiniowy",
-  "heal": "Ulecz"
+  "heal": "Ulecz",
+  "no_active_combat": "Brak aktywnej walki.",
+  "invalid_combat_location": "Nieprawidłowa lokalizacja walki.",
+  "no_enemy_found": "Nie znaleziono wroga.",
+  "combat_not_found": "Nie znaleziono walki.",
+  "action_not_found": "Nie znaleziono akcji."
 }

@@ -66,7 +66,7 @@ export default function combatHandler(io: Server) {
         return emitError(socket, "not_found", "combat_not_found");
       }
       if (combat.status !== "pending") {
-        return emitError(socket, "invalid_status", "combat_not_active");
+        return emitError(socket, "invalid_status", "no_active_combat");
       }
 
       const actionSuccess = handleCombatAction(combat, action);
