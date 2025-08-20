@@ -1,4 +1,4 @@
-import type { CombatAction, CombatState } from "~~/shared/types/combat-state";
+import type { CombatAction, CombatState } from "~~/shared/types";
 
 import { ACTION_HANDLERS } from "./actions";
 
@@ -13,8 +13,7 @@ export function handleCombatAction(state: CombatState, action: CombatAction): bo
   if (state.player.resources.health.current <= 0) {
     state.status = "defeat";
   }
-
-  if (state.enemy.resources.health.current <= 0) {
+  else if (state.enemy.resources.health.current <= 0) {
     state.status = "victory";
   }
 

@@ -1,6 +1,6 @@
-import type { CombatLocation } from "../enums/combat-location";
-import type { EnemyCharacter } from "./enemy";
-import type { PlayerCharacter } from "./player";
+import type { CombatLocation } from "../../enums/combat-location";
+import type { EnemyCharacter } from "../entities/enemy";
+import type { PlayerCharacter } from "../entities/player";
 
 export type CombatAction = "attack" | "defend" | "dodge" | "heal";
 export type CombatStatus = "victory" | "defeat" | "pending";

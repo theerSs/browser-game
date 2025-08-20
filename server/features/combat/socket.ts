@@ -1,43 +1,13 @@
-import type { CombatLocation } from "~~/shared/enums/combat-location";
-import type { CombatEvents, EnemyCharacter } from "~~/shared/types";
-import type { CombatAction, CombatState } from "~~/shared/types/combat-state";
+import type { CombatLocation } from "~~/shared/enums";
+import type { CombatAction, CombatErrorCode, CombatEvents } from "~~/shared/types";
 import type { Server, Socket } from "socket.io";
 
-import { COMBAT_LOCATIONS, PLAYER } from "~~/shared/const";
-import { getEnemy } from "~~/shared/const/characters/enemies";
-import _ from "lodash";
-import { v4 as uuidv4 } from "uuid";
+import { COMBAT_LOCATIONS } from "~~/shared/const";
 
-import { COMBAT_CACHE } from "./const/cache";
 import { handleCombatAction } from "./engine";
+import { createCombatCache, getCachedCombat, getLocationEnemy, removeCombatFromCache } from "./utils";
 
-function getLocationEnemy(locationId: CombatLocation): EnemyCharacter | null {
-  const location = COMBAT_LOCATIONS[locationId];
-  const enemyId = _.sample(location?.enemies ?? []);
-
-  return enemyId ? getEnemy(enemyId) : null;
-}
-
-function createCombatCache(locationId: CombatLocation): CombatState | null {
-  const combatId = uuidv4();
-  const enemy = getLocationEnemy(locationId);
-
-  if (!enemy)
-    return null;
-
-  const player = _.cloneDeep(PLAYER);
-
-  return {
-    id: combatId,
-    status: "pending",
-    location: locationId,
-    enemy,
-    player,
-    log: [],
-  };
-}
-
-function emitError(socket: Socket, code: string, message: string) {
+function emitError(socket: Socket, code: CombatErrorCode, message: string) {
   socket.emit("combat:error", { code, message });
 }
 
@@ -48,19 +18,19 @@ export default function combatHandler(io: Server) {
         return emitError(socket, "invalid_location", "invalid_combat_location");
       }
 
-      const combat = createCombatCache(locationId);
-      if (!combat) {
+      const enemy = getLocationEnemy(locationId);
+      if (!enemy) {
         return emitError(socket, "no_enemy", "no_enemy_found");
       }
 
-      COMBAT_CACHE.set(combat.id, combat);
+      const combat = createCombatCache(enemy, locationId);
 
       socket.join(combat.id);
       io.to(combat.id).emit("combat:update", combat);
     });
 
     socket.on("combat:action", (combatId: string, action: CombatAction) => {
-      const combat = COMBAT_CACHE.get(combatId);
+      const combat = getCachedCombat(combatId);
 
       if (!combat) {
         return emitError(socket, "not_found", "combat_not_found");
@@ -79,8 +49,19 @@ export default function combatHandler(io: Server) {
       }
     });
 
+    socket.on("combat:finish", (combatId: string) => {
+      const combat = getCachedCombat(combatId);
+      if (!combat) {
+        return emitError(socket, "not_found", "combat_not_found");
+      }
+
+      removeCombatFromCache(combatId);
+
+      io.to(combatId).emit("combat:closed", combat.player);
+    });
+
     socket.on("combat:continue", (combatId: string) => {
-      const combat = COMBAT_CACHE.get(combatId);
+      const combat = getCachedCombat(combatId);
       if (!combat) {
         return emitError(socket, "not_found", "combat_not_found");
       }

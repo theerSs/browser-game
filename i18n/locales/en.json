@@ -17,5 +17,10 @@
   "invalid_combat_location": "Invalid combat location",
   "no_enemy_found": "No enemy found",
   "combat_not_found": "Combat not found",
-  "action_not_found": "Action not found"
+  "action_not_found": "Action not found",
+  "should_continue_title": "Do you want to continue?",
+  "should_continue_desc": "You've won. You can go deeper into the dungeon or go back to the city. Remember that upon beeing defeted you'll loose everything you've collected so far.",
+  "return_to_city": "Return to city",
+  "go_deeper": "Go deeper",
+  "you_have_lost": "You've lost fight. Everything you've found was left in the dungeon"
 }

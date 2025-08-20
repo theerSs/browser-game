@@ -1,4 +1,4 @@
-import type { CombatAction, CombatState } from "~~/shared/types/combat-state";
+import type { CombatAction, CombatState } from "~~/shared/types";
 
 import { doAttack } from "./attack";
 import { doDefend } from "./defend";

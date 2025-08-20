@@ -17,5 +17,10 @@
   "invalid_combat_location": "Nieprawidłowa lokalizacja walki.",
   "no_enemy_found": "Nie znaleziono wroga.",
   "combat_not_found": "Nie znaleziono walki.",
-  "action_not_found": "Nie znaleziono akcji."
+  "action_not_found": "Nie znaleziono akcji.",
+  "return_to_city": "Wróć do miasta",
+  "go_deeper": "Walcz dalej",
+  "should_continue_desc": "Wygrałeś. Możesz wejść głębiej do lochu lub wrócić do miasta. Pamiętaj, że w przypadku przegranej stracisz wszystko, co do tej pory zebrałeś.",
+  "should_continue_title": "Chcesz kontynuować?",
+  "you_have_lost": "Przeglrałeś walkę. Wszystko co udało Ci się zdobyć przepadło w lochu"
 }
