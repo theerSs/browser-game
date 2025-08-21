@@ -1,39 +1,40 @@
-import type { CombatErrorCode, CombatEvents, CombatState } from "~~/shared/types";
-import type { Socket } from "socket.io-client";
+import type { CombatErrorCode, CombatState } from "~~/shared/types";
 
 import { CombatLocation } from "~~/shared/enums/combat-location";
-
-import { useSocket } from "~/composables/use-socket";
 
 export function useCombat() {
   const alertStore = useAlertStore();
   const combatState = ref<CombatState | null>(null);
-  const socket: Socket<CombatEvents> = useSocket();
-
-  socket.emit("combat:start", CombatLocation.FOREST);
-
-  socket.on("combat:update", (state: CombatState) => {
-    combatState.value = state;
-  });
-
-  socket.on("combat:closed", () => {
-    goToCharacterPage();
-  });
-
-  socket.on("combat:error", (error) => {
-    const criticalErrorCodes: CombatErrorCode[] = ["no_enemy", "not_found", "invalid_location"];
-
-    if (criticalErrorCodes.includes(error.code)) {
-      goToCharacterPage();
-    }
-
-    alertStore.setAlert({
-      type: "error",
-      message: error.message,
-    });
-  });
-
+  const socketStore = useSocketStore();
+  
   watchEffect(() => {
+    if(!socketStore.socket?.connected) return;
+
+    socketStore.socket.emit("combat:start", CombatLocation.FOREST);
+
+    socketStore.socket.on("combat:update", (state: CombatState) => {
+        combatState.value = state;
+      });
+
+    socketStore.socket.on("combat:closed", () => {
+        goToCharacterPage();
+      });
+
+    socketStore.socket.on("combat:error", (error) => {
+      const criticalErrorCodes: CombatErrorCode[] = ["no_enemy", "not_found", "invalid_location"];
+
+      if (criticalErrorCodes.includes(error.code)) {
+        goToCharacterPage();
+      }
+
+      alertStore.setAlert({
+        type: "error",
+        message: error.message,
+      });
+    });
+  })
+
+  watch(() => combatState.value?.status, () => {
     if (combatState.value?.status === "defeat") {
       goToCharacterPage();
       alertStore.setAlert({
@@ -61,7 +62,7 @@ export function useCombat() {
       return;
     }
 
-    socket.emit("combat:action", combatState.value.id, action);
+    socketStore.socket?.emit("combat:action", combatState.value.id, action);
   }
 
   function continueCombat() {
@@ -70,7 +71,7 @@ export function useCombat() {
       return;
     }
 
-    socket.emit("combat:continue", combatState.value.id);
+    socketStore.socket?.emit("combat:continue", combatState.value.id);
   }
 
   function goBackToCity() {
@@ -79,7 +80,7 @@ export function useCombat() {
       return;
     }
 
-    socket.emit("combat:finish", combatState.value.id);
+    socketStore.socket?.emit("combat:finish", combatState.value.id);
   }
 
   return { combatState, handleCombatAction, continueCombat, goBackToCity };

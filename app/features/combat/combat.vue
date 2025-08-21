@@ -8,7 +8,7 @@ const damageRange = computed(() => `${combatState.value?.player.stats.damage[0]}
 const dodgeChance = computed(() => {
   if (!combatState.value)
     return "";
-  return `${combatState.value.player.stats.dex - combatState.value.enemy.stats.dex}%`;
+  return `${Math.max(0, combatState.value.player.stats.dex - combatState.value.enemy.stats.dex)}%`;
 });
 </script>
 

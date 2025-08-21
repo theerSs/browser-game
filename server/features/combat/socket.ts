@@ -1,5 +1,5 @@
 import type { CombatLocation } from "~~/shared/enums";
-import type { CombatAction, CombatErrorCode, CombatEvents } from "~~/shared/types";
+import type { AppEvents, CombatAction, CombatErrorCode, CombatEvents } from "~~/shared/types";
 import type { Server, Socket } from "socket.io";
 
 import { COMBAT_LOCATIONS } from "~~/shared/const";
@@ -7,12 +7,12 @@ import { COMBAT_LOCATIONS } from "~~/shared/const";
 import { handleCombatAction } from "./engine";
 import { createCombatCache, getCachedCombat, getLocationEnemy, removeCombatFromCache } from "./utils";
 
-function emitError(socket: Socket, code: CombatErrorCode, message: string) {
+function emitError(socket: Socket<AppEvents>, code: CombatErrorCode, message: string) {
   socket.emit("combat:error", { code, message });
 }
 
 export default function combatHandler(io: Server) {
-  io.on("connection", (socket: Socket<CombatEvents>) => {
+  io.on("connection", (socket: Socket<AppEvents>) => {
     socket.on("combat:start", (locationId: CombatLocation) => {
       if (!COMBAT_LOCATIONS[locationId]) {
         return emitError(socket, "invalid_location", "invalid_combat_location");
