@@ -6,21 +6,19 @@ export function useCombat() {
   const alertStore = useAlertStore();
   const combatState = ref<CombatState | null>(null);
   const socketStore = useSocketStore();
-  
-  watchEffect(() => {
-    if(!socketStore.socket?.connected) return;
 
-    socketStore.socket.emit("combat:start", CombatLocation.FOREST);
+  watch(() => socketStore.socket, () => {
+    socketStore.socket?.emit("combat:start", CombatLocation.FOREST);
 
-    socketStore.socket.on("combat:update", (state: CombatState) => {
-        combatState.value = state;
-      });
+    socketStore.socket?.on("combat:update", (state: CombatState) => {
+      combatState.value = state;
+    });
 
-    socketStore.socket.on("combat:closed", () => {
-        goToCharacterPage();
-      });
+    socketStore.socket?.on("combat:closed", () => {
+      goToCharacterPage();
+    });
 
-    socketStore.socket.on("combat:error", (error) => {
+    socketStore.socket?.on("combat:error", (error) => {
       const criticalErrorCodes: CombatErrorCode[] = ["no_enemy", "not_found", "invalid_location"];
 
       if (criticalErrorCodes.includes(error.code)) {
@@ -32,7 +30,7 @@ export function useCombat() {
         message: error.message,
       });
     });
-  })
+  }, { immediate: true });
 
   watch(() => combatState.value?.status, () => {
     if (combatState.value?.status === "defeat") {
