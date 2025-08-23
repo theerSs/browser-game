@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import CombatActions from "./components/combat-actions.vue";
-import { useCombat } from "./composables/use-combat";
+import { useCombat, useCombatFormatting } from "./composables";
 
 const { combatState, handleCombatAction, continueCombat, goBackToCity } = useCombat();
-
-const damageRange = computed(() => `${combatState.value?.player.stats.damage[0]} - ${combatState.value?.player.stats.damage[1]}`);
-const dodgeChance = computed(() => {
-  if (!combatState.value)
-    return "";
-  return `${Math.max(0, combatState.value.player.stats.dex - combatState.value.enemy.stats.dex)}%`;
-});
+const { damageRange, dodgeChance, defenceValue } = useCombatFormatting(combatState);
 </script>
 
 <template>
@@ -33,7 +27,7 @@ const dodgeChance = computed(() => {
       />
       <CombatActions
         :damage-label="damageRange"
-        :defence-label="`${combatState.player.stats.defence}%`"
+        :defence-label="defenceValue"
         :dodge-label="dodgeChance"
         :potions-amount="combatState.player.inventory.potions.health.amount"
         @action-click="handleCombatAction"

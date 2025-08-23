@@ -10,7 +10,7 @@ export function doHeal(state: CombatState) {
     return;
   }
 
-  const healAmount = Math.floor(player.resources.health.current * potion.healAmount);
+  const healAmount = Math.floor(player.resources.health.max * potion.healAmount);
 
   healCharacter(player, healAmount);
 

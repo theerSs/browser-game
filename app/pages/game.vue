@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import NavigationDrawer from "~/features/navigation/navigation-drawer.vue";
-const {connect, disconnect} = useSocketStore();
+definePageMeta({
+  layout: "game",
+});
+
+const { connect, disconnect } = useSocketStore();
 
 onMounted(() => {
- connect() 
-})
+  connect();
+});
 
 onBeforeUnmount(() => {
-  disconnect()
-})
+  disconnect();
+});
 </script>
 
 <template>
-  <NavigationDrawer>
-    <NuxtPage />
-  </NavigationDrawer>
+  <NuxtPage />
 </template>
