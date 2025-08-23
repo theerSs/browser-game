@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     headers: event.headers,
   });
   event.context.user = session?.user as unknown as UserWithId;
-  if (event.path.startsWith("/game")) {
+  if (event.path.startsWith("/game") || event.path.startsWith("/characters-list")) {
     if (!session?.user) {
       await sendRedirect(event, "/", 302);
     }

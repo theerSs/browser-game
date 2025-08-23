@@ -4,6 +4,7 @@ import { goToCharacter } from "../utils";
 
 export function useCombatSocket(onCombatUpdate: (state: CombatState) => void) {
   const socketStore = useSocketStore();
+  const characterStore = useCharacterStore();
   const alertStore = useAlertStore();
 
   function removeSocketListeners() {
@@ -16,13 +17,13 @@ export function useCombatSocket(onCombatUpdate: (state: CombatState) => void) {
   }
 
   function setupSocketListeners() {
-    if (!socketStore.socket) {
+    if (!socketStore.socket || !characterStore.character) {
       return;
     }
 
     removeSocketListeners();
 
-    socketStore.socket.emit("combat:start", CombatLocation.FOREST);
+    socketStore.socket.emit("combat:start", CombatLocation.FOREST, characterStore.character?.id);
 
     socketStore.socket.on("combat:update", onCombatUpdate);
 

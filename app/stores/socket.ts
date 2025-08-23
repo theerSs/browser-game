@@ -53,9 +53,5 @@ export const useSocketStore = defineStore("useSocketStore", () => {
     connect();
   });
 
-  onUnmounted(() => {
-    disconnect();
-  });
-
   return { connect, disconnect, socket };
 });

@@ -1,11 +1,19 @@
+import type { PlayerCharacter } from "~~/shared/types/player";
+
 export const useCharacterStore = defineStore("useCharacterStore", () => {
   const character = ref<PlayerCharacter | null>(null);
   const socketStore = useSocketStore();
+
+  function removeSocketListeners() {
+    socketStore.socket?.off("character:updated");
+  }
 
   function setCharacter(characterId: PlayerCharacter["id"]) {
     if (!socketStore.socket) {
       return;
     }
+
+    removeSocketListeners();
 
     socketStore.socket.emit("character:listen", characterId);
     socketStore.socket.on("character:updated", (playerCharacter: PlayerCharacter) => {
@@ -13,20 +21,18 @@ export const useCharacterStore = defineStore("useCharacterStore", () => {
     });
   }
 
-  watch(character, (newCharacter) => {
+  watch(character, (newCharacter, oldCharacter) => {
     if (!newCharacter)
       return;
 
-    navigateTo("/game/character");
+    if (!oldCharacter || newCharacter.id !== oldCharacter.id) {
+      navigateTo("/game/character");
+    }
   });
 
   onUnmounted(() => {
-    if (!socketStore.socket) {
-      return;
-    }
-
-    socketStore.socket.off("character:updated");
+    removeSocketListeners();
   });
 
-  return { setCharacter };
+  return { character, setCharacter };
 });

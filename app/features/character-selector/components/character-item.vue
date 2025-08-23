@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { PlayerCharacterItem } from "~~/shared/types/player";
+
 const props = defineProps<{
   character: PlayerCharacterItem;
 }>();

@@ -1,16 +1,13 @@
 import type { CombatLocation } from "~~/shared/enums";
 import type { CombatState, EnemyCharacter } from "~~/shared/types";
+import type { PlayerCharacter } from "~~/shared/types/player";
 
-import { PLAYER } from "~~/shared/const";
-import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 
 import { COMBAT_CACHE } from "../const/cache";
 
-export function createCombatCache(enemy: EnemyCharacter, locationId: CombatLocation): CombatState {
+export function createCombatCache(enemy: EnemyCharacter, locationId: CombatLocation, player: PlayerCharacter): CombatState {
   const combatId = uuidv4();
-
-  const player = _.cloneDeep(PLAYER);
 
   const combat: CombatState = {
     id: combatId,
