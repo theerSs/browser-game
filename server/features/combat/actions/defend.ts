@@ -1,15 +1,12 @@
 import type { CombatState } from "~~/shared/types";
 
-import _ from "lodash";
-
-import { CharacterUtils } from "../utils";
+import { CharacterUtils, PlayerCharacterUtils } from "../utils";
 
 export function doDefend(state: CombatState) {
   const { player, enemy } = state;
 
-  const enemyDamage = _.random(enemy.stats.damage[0], enemy.stats.damage[1]);
-  const defenceModifier = Math.max(0.05, player.stats.defence / 100);
-  const modifiedDamage = Math.floor(enemyDamage - (enemyDamage * defenceModifier));
+  const enemyDamage = CharacterUtils.getDamage(enemy);
+  const modifiedDamage = PlayerCharacterUtils.getDefenceModifiedDamage(player, enemyDamage);
 
   CharacterUtils.applyDamage(player, modifiedDamage);
 }
