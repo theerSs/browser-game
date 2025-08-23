@@ -6,10 +6,11 @@ export default defineEventHandler(async (event) => {
   const session = await auth.api.getSession({
     headers: event.headers,
   });
+
   event.context.user = session?.user as unknown as UserWithId;
-  if (event.path.startsWith("/game") || event.path.startsWith("/characters-list")) {
-    if (!session?.user) {
-      await sendRedirect(event, "/", 302);
-    }
+  const protectedPaths = ["/game", "/characters-list"];
+  const isProtected = protectedPaths.some(path => event.path.startsWith(path));
+  if (isProtected && !session?.user) {
+    await sendRedirect(event, "/", 302);
   }
 });

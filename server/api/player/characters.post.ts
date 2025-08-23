@@ -1,8 +1,8 @@
 import type { UserWithId } from "~~/server/configs/auth";
 import type { CreateCharacterBody, PlayerCharacter } from "~~/shared/types/player";
 
-import db from "~~/server/configs/db";
-import { character } from "~~/server/configs/db/schema";
+import { createNewCharacter } from "~~/server/features/character/utils/create-new-character";
+import { CharacterRepository } from "~~/server/repositories";
 import { v4 as uuidv4 } from "uuid";
 
 export default defineEventHandler(async (event) => {
@@ -16,46 +16,13 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const newCharacter: PlayerCharacter = {
-    id: uuidv4(),
-    image: "player",
-    name: "Anton",
-    level: 1,
-    stats: {
-      damage: [5, 9],
-      defence: 3,
-      dex: 4,
-    },
-    resources: {
-      energy: { current: 15, max: 15 },
-      health: { current: 30, max: 30 },
-    },
-    inventory: {
-      potions: {
-        health: {
-          name: "health_potion",
-          amount: 2,
-          healAmount: 0.2,
-        },
-        energy: {
-          name: "energy_potion",
-          amount: 2,
-          healAmount: 0.1,
-        },
-      },
-      gold: 0,
-      items: [],
-    },
-  };
+  const character = createNewCharacter(body);
 
-  await db.insert(character).values({
-    ...newCharacter,
-    userId: user.id,
-  });
+  await CharacterRepository.createCharacter(user.id, character);
 
   return {
     statusCode: 201,
     message: "Character created successfully",
-    character: newCharacter,
+    character,
   };
 });

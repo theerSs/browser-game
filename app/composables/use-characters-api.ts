@@ -1,11 +1,11 @@
-import type { PlayerCharacter, PlayerCharacterItem } from "~~/shared/types";
+import type { PlayerCharacter, PlayerCharacterItem } from "~~/shared/types/player";
 
 export function useCharactersApi() {
   const charactersReq = useCsrfFetch<PlayerCharacterItem[]>("/api/player/characters");
   const { $csrfFetch } = useNuxtApp();
   const { performAction, isPending } = useApiRequest();
 
-  const isRequestPending = computed(() => charactersReq.pending.value || isPending.value);
+  const isLoading = computed(() => !charactersReq.data.value || isPending.value);
 
   async function getCharacterById(id: string): Promise<PlayerCharacter | null> {
     return await performAction(
@@ -41,5 +41,5 @@ export function useCharactersApi() {
     );
   }
 
-  return { characters: charactersReq.data, isRequestPending, createCharacter, deleteCharacter, getCharacterById };
+  return { characters: charactersReq.data, isLoading, createCharacter, deleteCharacter, getCharacterById };
 }

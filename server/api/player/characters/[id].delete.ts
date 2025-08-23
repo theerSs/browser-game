@@ -1,6 +1,4 @@
-import db from "~~/server/configs/db";
-import { character } from "~~/server/configs/db/schema";
-import { eq } from "drizzle-orm";
+import { CharacterRepository } from "~~/server/repositories";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
@@ -11,7 +9,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  await db.delete(character).where(eq(character.id, id));
+  await CharacterRepository.deleteCharacter(id);
 
   return {
     statusCode: 200,

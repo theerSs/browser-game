@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import CharacterItem from "./components/character-item.vue";
 
-const { characters, isRequestPending, deleteCharacter, createCharacter } = useCharactersApi();
+const { characters, isLoading, deleteCharacter, createCharacter } = useCharactersApi();
 const { setCharacter } = useCharacterStore();
 </script>
 
 <template>
   <div class="container max-w-xl min-w-60 flex flex-col items-center justify-center gap-4">
     <div class="flex justify-start container">
-      <button class="btn btn-primary" @click="createCharacter('Anton')">
+      <button class="btn btn-primary" @click="createCharacter('Romuald')">
         {{ $t("create_new_character") }}
         <Icon name="tabler:circle-plus" size="24" />
       </button>
@@ -25,7 +25,7 @@ const { setCharacter } = useCharacterStore();
         @delete="deleteCharacter(character.id)"
         @play="setCharacter(character.id)"
       />
-      <div v-if="isRequestPending" class="w-full flex justify-center p-2">
+      <div v-if="isLoading" class="w-full flex justify-center p-2">
         <BaseLoader />
       </div>
     </ul>

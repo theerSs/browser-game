@@ -40,5 +40,9 @@ export function useCombatSocket(onCombatUpdate: (state: CombatState) => void) {
     });
   }
 
+  onBeforeUnmount(() => {
+    removeSocketListeners();
+  });
+
   watch(() => socketStore.socket, setupSocketListeners, { immediate: true });
 }

@@ -1,10 +1,10 @@
 import type { AppEvents } from "~~/shared/types";
 import type { Server, Socket } from "socket.io";
 
-import { emitError, getCachedCombat, getLocationEnemy } from "../utils";
+import { CombatCacheUtils, emitError, getLocationEnemy } from "../utils";
 
 export function continueCombat(socket: Socket<AppEvents>, io: Server, combatId: string) {
-  const combat = getCachedCombat(combatId);
+  const combat = CombatCacheUtils.getCombat(combatId);
   if (!combat) {
     return emitError(socket, "not_found", "combat_not_found");
   }

@@ -21,6 +21,11 @@ export const useCharacterStore = defineStore("useCharacterStore", () => {
     });
   }
 
+  function removeCharacter() {
+    character.value = null;
+    removeSocketListeners();
+  }
+
   watch(character, (newCharacter, oldCharacter) => {
     if (!newCharacter)
       return;
@@ -30,9 +35,5 @@ export const useCharacterStore = defineStore("useCharacterStore", () => {
     }
   });
 
-  onUnmounted(() => {
-    removeSocketListeners();
-  });
-
-  return { character, setCharacter };
+  return { character, setCharacter, removeCharacter };
 });

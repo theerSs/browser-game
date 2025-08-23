@@ -5,6 +5,12 @@ definePageMeta({
   layout: "game",
   middleware: [characterSelection],
 });
+
+const characterStore = useCharacterStore();
+
+onBeforeUnmount(() => {
+  characterStore.removeCharacter();
+});
 </script>
 
 <template>

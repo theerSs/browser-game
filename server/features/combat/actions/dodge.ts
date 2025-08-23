@@ -2,7 +2,7 @@ import type { CombatState } from "~~/shared/types";
 
 import _ from "lodash";
 
-import { applyDamage } from "../utils";
+import { CharacterUtils } from "../utils";
 
 export function doDodge(state: CombatState) {
   const { player, enemy } = state;
@@ -12,6 +12,6 @@ export function doDodge(state: CombatState) {
 
   if (roll >= clampedChance) {
     const enemyDamage = _.random(enemy.stats.damage[0], enemy.stats.damage[1]);
-    applyDamage(player, enemyDamage);
+    CharacterUtils.applyDamage(player, enemyDamage);
   }
 }

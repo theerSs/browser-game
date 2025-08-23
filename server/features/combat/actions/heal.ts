@@ -1,6 +1,6 @@
 import type { CombatState } from "~~/shared/types";
 
-import { consumeHealthPotion, healCharacter } from "../utils";
+import { CharacterUtils, consumeHealthPotion } from "../utils";
 
 export function doHeal(state: CombatState) {
   const { player } = state;
@@ -12,7 +12,7 @@ export function doHeal(state: CombatState) {
 
   const healAmount = Math.floor(player.resources.health.max * potion.healAmount);
 
-  healCharacter(player, healAmount);
+  CharacterUtils.heal(player, healAmount);
 
   consumeHealthPotion(player);
 }

@@ -1,4 +1,4 @@
-import db from "~~/server/configs/db";
+import { CharacterRepository } from "~~/server/repositories";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
@@ -9,16 +9,14 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const characterData = await db.query.character.findFirst({
-    where: (fields, { eq }) => eq(fields.id, id),
-  });
+  const character = await CharacterRepository.getCharacterById(id);
 
-  if (!characterData) {
+  if (!character) {
     return createError({
       status: 404,
       message: "Character not found",
     });
   }
 
-  return characterData;
+  return character;
 });

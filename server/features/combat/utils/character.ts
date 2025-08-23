@@ -1,12 +1,14 @@
-import type { Character } from "~~/shared/types";
+import type { Character } from "~~/shared/types/player";
 
-export function applyDamage(target: Character, amount: number) {
-  target.resources.health.current = Math.max(0, target.resources.health.current - amount);
-}
+export class CharacterUtils {
+  static applyDamage(target: Character, amount: number) {
+    target.resources.health.current = Math.max(0, target.resources.health.current - amount);
+  }
 
-export function healCharacter(target: Character, amount: number) {
-  target.resources.health.current = Math.min(
-    target.resources.health.max,
-    target.resources.health.current + amount,
-  );
+  static heal(target: Character, amount: number) {
+    target.resources.health.current = Math.min(
+      target.resources.health.max,
+      target.resources.health.current + amount,
+    );
+  }
 }

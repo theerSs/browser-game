@@ -1,0 +1,1 @@
+export { CharacterRepository } from "./character";

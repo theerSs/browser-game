@@ -3,10 +3,10 @@ import type { AppEvents } from "~~/shared/types";
 import type { PlayerCharacter } from "~~/shared/types/player";
 import type { Server, Socket } from "socket.io";
 
-import db from "~~/server/configs/db";
+import { CharacterRepository } from "~~/server/repositories";
 import { COMBAT_LOCATIONS } from "~~/shared/const";
 
-import { createCombatCache, emitError, getLocationEnemy } from "../utils";
+import { CombatCacheUtils, emitError, getLocationEnemy } from "../utils";
 
 export async function startCombat(socket: Socket<AppEvents>, io: Server, locationId: CombatLocation, characterId: PlayerCharacter["id"]) {
   if (!COMBAT_LOCATIONS[locationId]) {
@@ -18,15 +18,13 @@ export async function startCombat(socket: Socket<AppEvents>, io: Server, locatio
     return emitError(socket, "no_enemy", "no_enemy_found");
   }
 
-  const player = await db.query.character.findFirst({
-    where: (fields, { eq }) => eq(fields.id, characterId),
-  });
+  const character = await CharacterRepository.getCharacterById(characterId);
 
-  if (!player) {
+  if (!character) {
     return emitError(socket, "no_player", "no_player_found");
   }
 
-  const combat = createCombatCache(enemy, locationId, player);
+  const combat = CombatCacheUtils.createCombat(enemy, locationId, character);
   if (!combat) {
     return emitError(socket, "no_enemy", "no_enemy_found");
   }
