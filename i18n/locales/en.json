@@ -22,5 +22,12 @@
   "should_continue_desc": "You've won. You can go deeper into the dungeon or go back to the city. Remember that upon beeing defeted you'll loose everything you've collected so far.",
   "return_to_city": "Return to city",
   "go_deeper": "Go deeper",
-  "you_have_lost": "You've lost fight. Everything you've found was left in the dungeon"
+  "you_have_lost": "You've lost fight. Everything you've found was left in the dungeon",
+  "play_character": "Play this character",
+  "delete_character": "Delete this character",
+  "your_characters_list": "List of your characters",
+  "create_new_character": "Create new character",
+  "character_details_loading_error": "Error during character details loading",
+  "character_creation_error": "Error during character creation",
+  "character_deletion_error": "Error during charactere delete"
 }

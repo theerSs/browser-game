@@ -2,16 +2,6 @@
 definePageMeta({
   layout: "game",
 });
-
-const { connect, disconnect } = useSocketStore();
-
-onMounted(() => {
-  connect();
-});
-
-onBeforeUnmount(() => {
-  disconnect();
-});
 </script>
 
 <template>

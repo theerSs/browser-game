@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CharacterResource } from "~~/shared/types/entities/character";
+import type { CharacterResource } from "~~/shared/types/player/character";
 
 const props = defineProps<{
   resourceType: "health" | "energy";

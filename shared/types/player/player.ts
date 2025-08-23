@@ -25,6 +25,12 @@ export type Potion = {
 export type InventoryItem = {
   id: string;
   name: string;
-  descritpion: string;
+  description: string;
   amount: number;
+};
+
+export type PlayerCharacterItem = Pick<PlayerCharacter, "id" | "image" | "name" | "level">;
+
+export type CreateCharacterBody = {
+  name: string;
 };

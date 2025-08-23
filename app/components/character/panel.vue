@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Character } from "~~/shared/types/entities/character";
+import type { Character } from "~~/shared/types/player/character";
 
 const props = defineProps<Pick<Character, "image" | "level" | "name" | "resources"> & { imgAlt: string }>();
 </script>

@@ -3,6 +3,7 @@ import type { NitroApp } from "nitropack";
 import { Server as Engine } from "engine.io";
 import { Server } from "socket.io";
 
+import characterHandler from "../features/character/socket";
 import { combatHandler } from "../features/combat";
 
 export default defineNitroPlugin((nitroApp: NitroApp) => {
@@ -12,6 +13,7 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
   io.bind(engine);
 
   combatHandler(io);
+  characterHandler(io);
 
   nitroApp.router.use("/socket.io/", defineEventHandler({
     handler(event) {

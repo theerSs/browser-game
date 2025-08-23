@@ -22,5 +22,12 @@
   "go_deeper": "Walcz dalej",
   "should_continue_desc": "Wygrałeś. Możesz wejść głębiej do lochu lub wrócić do miasta. Pamiętaj, że w przypadku przegranej stracisz wszystko, co do tej pory zebrałeś.",
   "should_continue_title": "Chcesz kontynuować?",
-  "you_have_lost": "Przeglrałeś walkę. Wszystko co udało Ci się zdobyć przepadło w lochu"
+  "you_have_lost": "Przeglrałeś walkę. Wszystko co udało Ci się zdobyć przepadło w lochu",
+  "delete_character": "Usuń tę postać",
+  "play_character": "Zagraj tą postacią",
+  "your_characters_list": "Lista twoich postaci",
+  "create_new_character": "Utwórz nową postać",
+  "character_details_loading_error": "Błąd podczas ładowania szczegółów postaci",
+  "character_creation_error": "Błąd podczas tworzenia postaci",
+  "character_deletion_error": "Błąd podczas usuwania postaci"
 }
