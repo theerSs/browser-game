@@ -2,10 +2,6 @@ import type { EnemyCharacter } from "~~/shared/types";
 import type { PlayerCharacter } from "~~/shared/types/player";
 
 export class PlayerCharacterUtils {
-  static consumeHealthPotion(player: PlayerCharacter) {
-    player.inventory.potions.health.amount--;
-  }
-
   static heal(player: PlayerCharacter) {
     const potion = player.inventory.potions.health;
     if (potion.amount === 0) {
@@ -18,6 +14,7 @@ export class PlayerCharacterUtils {
       player.resources.health.max,
       player.resources.health.current + healAmount,
     );
+    player.inventory.potions.health.amount--;
   }
 
   static getDodgeChance(player: PlayerCharacter, enemy: EnemyCharacter): number {
