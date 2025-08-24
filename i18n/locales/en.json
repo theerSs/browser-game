@@ -16,6 +16,8 @@
   "no_active_combat": "No active combat.",
   "invalid_combat_location": "Invalid combat location",
   "no_enemy_found": "No enemy found",
+  "continue_invalid_combat_status": "You can't continue combat which hasn't been won.",
+  "finish_invalid_combat_status": "You can't finish combat which hasn't been won.",
   "combat_not_found": "Combat not found",
   "action_not_found": "Action not found",
   "should_continue_title": "Do you want to continue?",

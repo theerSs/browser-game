@@ -9,6 +9,10 @@ export function finishCombat(socket: Socket<AppEvents>, io: Server, combatId: st
     return emitError(socket, "not_found", "combat_not_found");
   }
 
+  if (combat.status !== "victory") {
+    return emitError(socket, "invalid_status", "finish_invalid_combat_status");
+  }
+
   CombatCacheUtils.removeCombat(combatId);
 
   io.to(combatId).emit("combat:closed", combat.player);

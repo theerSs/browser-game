@@ -17,6 +17,8 @@
   "invalid_combat_location": "Nieprawidłowa lokalizacja walki.",
   "no_enemy_found": "Nie znaleziono wroga.",
   "combat_not_found": "Nie znaleziono walki.",
+  "continue_invalid_combat_status": "Nie można kontynuować walki, która nie została wygrana.",
+  "finish_invalid_combat_status": "Nie można zakończyć walki, która nie została wygrana.",
   "action_not_found": "Nie znaleziono akcji.",
   "return_to_city": "Wróć do miasta",
   "go_deeper": "Walcz dalej",

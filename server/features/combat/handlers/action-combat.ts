@@ -10,13 +10,18 @@ export function combatAction(socket: Socket<AppEvents>, io: Server, combatId: st
   if (!combat) {
     return emitError(socket, "not_found", "combat_not_found");
   }
-  if (combat.status !== "pending") {
+
+  const originalStatus = combat.status;
+  if (originalStatus !== "pending") {
     return emitError(socket, "invalid_status", "no_active_combat");
   }
 
   const actionSuccess = handleCombatAction(combat, action);
 
   if (actionSuccess) {
+    if (combat.status === "defeat") {
+      CombatCacheUtils.removeCombat(combat.id);
+    }
     io.to(combatId).emit("combat:update", combat);
   }
   else {

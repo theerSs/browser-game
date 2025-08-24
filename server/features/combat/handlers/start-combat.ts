@@ -1,5 +1,5 @@
 import type { CombatLocation } from "~~/shared/enums";
-import type { AppEvents } from "~~/shared/types";
+import type { AppEvents, CombatState } from "~~/shared/types";
 import type { PlayerCharacter } from "~~/shared/types/player";
 import type { Server, Socket } from "socket.io";
 
@@ -8,7 +8,18 @@ import { COMBAT_LOCATIONS } from "~~/shared/const";
 
 import { CombatCacheUtils, emitError, getLocationEnemy } from "../utils";
 
+function handleSocketOnStart(socket: Socket<AppEvents>, io: Server, combat: CombatState) {
+  socket.join(combat.id);
+  io.to(combat.id).emit("combat:update", combat);
+}
+
 export async function startCombat(socket: Socket<AppEvents>, io: Server, locationId: CombatLocation, characterId: PlayerCharacter["id"]) {
+  const existingCombat = CombatCacheUtils.getCombatByCharacterId(characterId);
+  if (existingCombat) {
+    handleSocketOnStart(socket, io, existingCombat);
+    return;
+  }
+
   if (!COMBAT_LOCATIONS[locationId]) {
     return emitError(socket, "invalid_location", "invalid_combat_location");
   }
@@ -29,6 +40,5 @@ export async function startCombat(socket: Socket<AppEvents>, io: Server, locatio
     return emitError(socket, "no_enemy", "no_enemy_found");
   }
 
-  socket.join(combat.id);
-  io.to(combat.id).emit("combat:update", combat);
+  handleSocketOnStart(socket, io, combat);
 }

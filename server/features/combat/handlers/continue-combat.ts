@@ -9,6 +9,10 @@ export function continueCombat(socket: Socket<AppEvents>, io: Server, combatId: 
     return emitError(socket, "not_found", "combat_not_found");
   }
 
+  if (combat.status !== "victory") {
+    return emitError(socket, "invalid_status", "continue_invalid_combat_status");
+  }
+
   const enemy = getLocationEnemy(combat.location);
   if (!enemy) {
     return emitError(socket, "no_enemy", "no_enemy_found");

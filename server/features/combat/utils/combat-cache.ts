@@ -31,4 +31,13 @@ export class CombatCacheUtils {
   static getCombat(combatId: string): CombatState | undefined {
     return COMBAT_CACHE.get(combatId);
   }
+
+  static getCombatByCharacterId(characterId: PlayerCharacter["id"]): CombatState | undefined {
+    for (const combat of COMBAT_CACHE.values()) {
+      if (combat.player.id === characterId) {
+        return combat;
+      }
+    }
+    return undefined;
+  }
 }

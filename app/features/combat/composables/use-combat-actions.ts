@@ -1,10 +1,12 @@
+import { goToCharacter } from "../utils";
+
 export function useCombatActions(combatState: Ref<CombatState | null>) {
   const socketStore = useSocketStore();
   const alertStore = useAlertStore();
 
   function handleNoActiveCombat() {
     alertStore.setAlert({ type: "error", message: "no_active_combat" });
-    navigateTo("/game/character");
+    goToCharacter();
   }
 
   function handleCombatAction(action: CombatAction) {
