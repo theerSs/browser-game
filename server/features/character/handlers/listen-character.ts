@@ -1,4 +1,3 @@
-import type { PlayerCharacter } from "~~/shared/types/player";
 import type { Server, Socket } from "socket.io";
 
 import { CharacterRepository } from "~~/server/repositories";

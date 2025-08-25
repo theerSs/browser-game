@@ -1,0 +1,1 @@
+ALTER TABLE `character` ADD `experience` text NOT NULL;

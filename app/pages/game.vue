@@ -7,9 +7,11 @@ definePageMeta({
 });
 
 const characterStore = useCharacterStore();
+const socketStore = useSocketStore();
 
 onBeforeUnmount(() => {
   characterStore.removeCharacter();
+  socketStore.disconnect();
 });
 </script>
 

@@ -14,7 +14,7 @@ export function useCombat() {
   watch(() => combatState.value?.status, () => {
     if (combatState.value?.status === "defeat") {
       goToCharacter();
-      alertStore.setAlert({ type: "info", message: "you_have_lost" });
+      alertStore.setAlert({ type: "warning", message: "you_have_lost" });
     }
   });
 

@@ -1,5 +1,3 @@
-import type { PlayerCharacter } from "~~/shared/types/player";
-
 export const useCharacterStore = defineStore("useCharacterStore", () => {
   const character = ref<PlayerCharacter | null>(null);
   const socketStore = useSocketStore();
@@ -10,13 +8,13 @@ export const useCharacterStore = defineStore("useCharacterStore", () => {
 
   function setCharacter(characterId: PlayerCharacter["id"]) {
     if (!socketStore.socket) {
-      return;
+      socketStore.connect();
     }
 
     removeSocketListeners();
 
-    socketStore.socket.emit("character:listen", characterId);
-    socketStore.socket.on("character:updated", (playerCharacter: PlayerCharacter) => {
+    socketStore.socket?.emit("character:listen", characterId);
+    socketStore.socket?.on("character:updated", (playerCharacter: PlayerCharacter) => {
       character.value = playerCharacter;
     });
   }

@@ -1,5 +1,3 @@
-import type { PlayerCharacter, PlayerCharacterItem } from "~~/shared/types/player";
-
 import { eq } from "drizzle-orm";
 
 import type { UserWithId } from "../configs/auth";
@@ -23,6 +21,16 @@ export class CharacterRepository {
     return foundCharacter;
   }
 
+  static async updateCharacter(data: PlayerCharacter): Promise<boolean> {
+    const result = await db.update(character).set({
+      level: data.level,
+      resources: data.resources,
+      inventory: data.inventory,
+    }).where(eq(character.id, data.id));
+
+    return result.rowsAffected > 0;
+  }
+
   static async deleteCharacter(id: PlayerCharacter["id"]): Promise<boolean> {
     const result = await db.delete(character).where(eq(character.id, id));
 
@@ -39,9 +47,9 @@ export class CharacterRepository {
     }));
   }
 
-  static async createCharacter(userId: UserWithId["id"], newCharacter: PlayerCharacter): Promise<boolean> {
+  static async createCharacter(userId: UserWithId["id"], name: string): Promise<boolean> {
     const result = await db.insert (character).values({
-      ...newCharacter,
+      name,
       userId,
     });
 

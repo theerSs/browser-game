@@ -1,5 +1,3 @@
-import type { PlayerCharacter, PlayerCharacterItem } from "~~/shared/types/player";
-
 export function useCharactersApi() {
   const charactersReq = useCsrfFetch<PlayerCharacterItem[]>("/api/player/characters");
   const { $csrfFetch } = useNuxtApp();

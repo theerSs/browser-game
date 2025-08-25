@@ -1,20 +1,50 @@
-import type { CharacterResources, CharacterStats, Inventory } from "~~/shared/types";
+import type { Experience } from "~~/shared/types";
 
 import {
   int,
   sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
+import { v4 as uuidv4 } from "uuid";
 
 import { user } from "./auth";
 
 export const character = sqliteTable("character", {
-  id: text("id").primaryKey(),
-  image: text("image").notNull(),
+  id: text("id").default(uuidv4()).primaryKey(),
+  image: text("image").default("player").notNull(),
   name: text("name").notNull(),
-  level: int("level").notNull(),
-  stats: text("stats", { mode: "json" }).$type<CharacterStats>().notNull(),
-  resources: text("resources", { mode: "json" }).$type<CharacterResources>().notNull(),
-  inventory: text("inventory", { mode: "json" }).$type<Inventory>().notNull(),
+  level: int("level").default(1).notNull(),
+  experience: text("experience", { mode: "json" }).$type<Experience>().default({ current: 0, toLevelUp: 100 }).notNull(),
+  stats: text("stats", { mode: "json" }).$type<CharacterStats>().default({
+    damage: [5, 9],
+    defence: 3,
+    dex: 4,
+  }).notNull(),
+  resources: text("resources", { mode: "json" }).$type<CharacterResources>().default({
+    energy: {
+      current: 15,
+      max: 15,
+    },
+    health: {
+      current: 30,
+      max: 30,
+    },
+  }).notNull(),
+  inventory: text("inventory", { mode: "json" }).$type<Inventory>().default({
+    potions: {
+      health: {
+        name: "health_potion",
+        amount: 2,
+        healAmount: 0.2,
+      },
+      energy: {
+        name: "energy_potion",
+        amount: 2,
+        healAmount: 0.1,
+      },
+    },
+    gold: 0,
+    items: [],
+  }).notNull(),
   userId: int().notNull().references(() => user.id),
 });

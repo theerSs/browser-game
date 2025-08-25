@@ -4,7 +4,7 @@ import { Server as Engine } from "engine.io";
 import { Server } from "socket.io";
 
 import characterHandler from "../features/character/socket";
-import { combatHandler } from "../features/combat";
+import combatHandler from "../features/combat/socket/combat-handler";
 
 export default defineNitroPlugin((nitroApp: NitroApp) => {
   const engine = new Engine();

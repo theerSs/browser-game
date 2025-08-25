@@ -1,7 +1,8 @@
-import type { EnemyCharacter } from "~~/shared/types";
-
-import { Enemy } from "~~/shared/enums/enemy";
 import _ from "lodash";
+
+import type { EnemyCharacter } from "../../types";
+
+import { Enemy } from "../../enums";
 
 const ENEMIES: Record<Enemy, EnemyCharacter> = {
   [Enemy.BAT]: {

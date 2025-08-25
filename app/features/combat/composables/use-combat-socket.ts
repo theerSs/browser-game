@@ -31,7 +31,7 @@ export function useCombatSocket(onCombatUpdate: (state: CombatState) => void) {
       goToCharacter();
     });
 
-    socketStore.socket.on("combat:error", (error) => {
+    socketStore.socket.on("combat:error", (error: any) => {
       const criticalErrorCodes: CombatErrorCode[] = ["no_enemy", "not_found", "invalid_location"];
       if (criticalErrorCodes.includes(error.code)) {
         goToCharacter();

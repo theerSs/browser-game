@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { CharacterResource } from "~~/shared/types/player/character";
-
 import { ref, watch } from "vue";
 
 const props = defineProps<{

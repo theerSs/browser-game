@@ -1,5 +1,3 @@
-import type { AppEvents } from "~~/shared/types";
-import type { PlayerCharacter } from "~~/shared/types/player";
 import type { Server, Socket } from "socket.io";
 
 import { listenCharacter } from "./handlers";

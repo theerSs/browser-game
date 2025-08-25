@@ -1,5 +1,3 @@
-import type { PlayerCharacterItem } from "~~/shared/types/player";
-
 import { CharacterRepository } from "~~/server/repositories";
 
 import type { UserWithId } from "../../configs/auth";

@@ -1,4 +1,3 @@
-import type { AppEvents } from "~~/shared/types/socket-events";
 import type { Socket } from "socket.io-client";
 
 import { io } from "socket.io-client";
@@ -48,10 +47,6 @@ export const useSocketStore = defineStore("useSocketStore", () => {
   function onDisconnect() {
     transport.value = "N/A";
   }
-
-  onMounted(() => {
-    connect();
-  });
 
   return { connect, disconnect, socket };
 });

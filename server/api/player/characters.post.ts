@@ -1,9 +1,6 @@
 import type { UserWithId } from "~~/server/configs/auth";
-import type { CreateCharacterBody, PlayerCharacter } from "~~/shared/types/player";
 
-import { createNewCharacter } from "~~/server/features/character/utils/create-new-character";
 import { CharacterRepository } from "~~/server/repositories";
-import { v4 as uuidv4 } from "uuid";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<CreateCharacterBody>(event);
@@ -16,13 +13,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const character = createNewCharacter(body);
-
-  await CharacterRepository.createCharacter(user.id, character);
+  await CharacterRepository.createCharacter(user.id, body.name);
 
   return {
     statusCode: 201,
     message: "Character created successfully",
-    character,
   };
 });
