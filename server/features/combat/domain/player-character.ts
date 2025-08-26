@@ -51,4 +51,8 @@ export class PlayerCharacterEntity extends CharacterEntity {
       this.state.experience.current += expGained;
     }
   }
+
+  addGold(amount: number) {
+    this.state.inventory.gold += amount;
+  }
 }

@@ -31,7 +31,7 @@ export async function combatAction(socket: Socket<AppEvents>, combatId: string, 
       handleCombatDefeat(combat, socket);
     }
     else if (combat.status === "victory") {
-      CombatService.increaseGainedExperience(combat);
+      CombatService.updateRewards(combat);
     }
     socket.emit("combat:update", combat);
   }

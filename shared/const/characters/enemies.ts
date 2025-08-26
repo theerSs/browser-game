@@ -18,7 +18,8 @@ const ENEMIES: Record<Enemy, EnemyCharacter> = {
       energy: { current: 10, max: 10 },
       health: { current: 12, max: 12 },
     },
-    loot: ["bat_wing", "tiny_claw"],
+    goldRange: [0, 5],
+    expGain: 5,
   },
   [Enemy.SKELETON]: {
     image: "skeleton",
@@ -33,7 +34,8 @@ const ENEMIES: Record<Enemy, EnemyCharacter> = {
       energy: { current: 8, max: 8 },
       health: { current: 25, max: 25 },
     },
-    loot: ["bone", "rusty_sword"],
+    goldRange: [5, 30],
+    expGain: 25,
   },
   [Enemy.GOBLIN]: {
     image: "goblin",
@@ -48,7 +50,8 @@ const ENEMIES: Record<Enemy, EnemyCharacter> = {
       energy: { current: 12, max: 12 },
       health: { current: 18, max: 18 },
     },
-    loot: ["goblin_ear", "coin_pouch"],
+    goldRange: [5, 20],
+    expGain: 15,
   },
 } as const;
 

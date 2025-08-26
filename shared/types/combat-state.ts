@@ -11,6 +11,10 @@ export type CombatState = {
   location: CombatLocation;
   player: PlayerCharacter;
   enemy: EnemyCharacter;
-  log: string[];
+  rewards: Rewards;
+};
+
+export type Rewards = {
   experience: number;
+  gold: number;
 };

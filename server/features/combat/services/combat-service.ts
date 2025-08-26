@@ -1,5 +1,7 @@
 import type { CombatState } from "~~/shared/types/combat-state";
 
+import _ from "lodash";
+
 import { ACTION_HANDLERS } from "../engine";
 
 export class CombatService {
@@ -20,7 +22,11 @@ export class CombatService {
     return true;
   }
 
-  static increaseGainedExperience(combat: CombatState) {
-    combat.experience += Math.max(50, (combat.enemy.level - combat.player.level) * 100);
+  static updateRewards(combat: CombatState) {
+    const { enemy, rewards } = combat;
+    const [minGold, maxGold] = enemy.goldRange;
+
+    rewards.experience += enemy.expGain;
+    rewards.gold += _.random(minGold, maxGold);
   }
 }

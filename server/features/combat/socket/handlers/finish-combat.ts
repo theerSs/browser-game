@@ -17,10 +17,13 @@ export async function finishCombat(socket: Socket<AppEvents>, combatId: string) 
   }
 
   CombatCacheService.removeCombat(combatId);
-  const playerCharacter = new PlayerCharacterEntity(combat.player);
-  playerCharacter.levelUp(combat.experience);
+  const { player, rewards } = combat;
+
+  const playerCharacter = new PlayerCharacterEntity(player);
+  playerCharacter.levelUp(rewards.experience);
+  playerCharacter.addGold(rewards.gold);
   const characterService = new CharacterService(socket);
-  await characterService.updateCharacter(combat.player);
+  await characterService.updateCharacter(player);
 
   socket.emit("combat:closed");
 }

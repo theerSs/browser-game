@@ -14,8 +14,10 @@ export class CombatCacheService {
       location: locationId,
       enemy,
       player,
-      log: [],
-      experience: 0,
+      rewards: {
+        experience: 0,
+        gold: 0,
+      },
     };
 
     COMBAT_CACHE.set(combatId, combat);
