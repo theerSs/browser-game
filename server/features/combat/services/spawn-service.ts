@@ -1,12 +1,18 @@
 import type { CombatLocation } from "~~/shared/enums";
 
-import { COMBAT_LOCATIONS, getEnemy } from "~~/shared/const";
+import { COMBAT_LOCATIONS } from "~~/shared/const";
+import { generateEnemy } from "~~/shared/const/characters/enemies";
 import _ from "lodash";
 
 export class SpawnService {
-  static getLocationEnemy(locationId: CombatLocation): EnemyCharacter | null {
+  static getLocationEnemy(locationId: CombatLocation, characterLevel: number): EnemyCharacter | null {
     const location = COMBAT_LOCATIONS[locationId];
     const enemyId = _.sample(location?.enemies ?? []);
-    return enemyId ? getEnemy(enemyId) : null;
+    if (!enemyId)
+      return null;
+
+    const enemy = generateEnemy(enemyId, characterLevel);
+
+    return enemy;
   }
 }

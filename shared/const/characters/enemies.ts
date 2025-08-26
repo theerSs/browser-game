@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import type { EnemyCharacter } from "../../types";
+import type { EnemyCharacter, PlayerCharacter } from "../../types";
 
 import { Enemy } from "../../enums";
 
@@ -55,6 +55,39 @@ const ENEMIES: Record<Enemy, EnemyCharacter> = {
   },
 } as const;
 
-export function getEnemy(enemyId: Enemy): EnemyCharacter {
-  return _.cloneDeep(ENEMIES[enemyId]);
+export function generateEnemy(enemyId: Enemy, characterLevel: PlayerCharacter["level"]): EnemyCharacter {
+  const baseEnemy = _.cloneDeep(ENEMIES[enemyId]);
+  const level = characterLevel > 5 ? _.random(characterLevel, characterLevel + 2) : characterLevel;
+
+  const dmgScale = 1.5;
+  const gScale = 3;
+  const energyScale = 2;
+
+  return {
+    ...baseEnemy,
+    level,
+    stats: {
+      damage: [
+        Math.floor(baseEnemy.stats.damage[0] + level * dmgScale),
+        Math.floor(baseEnemy.stats.damage[1] + level * dmgScale),
+      ],
+      defence: baseEnemy.stats.defence + Math.floor(level / 2),
+      dex: baseEnemy.stats.dex + Math.floor(level / 3),
+    },
+    resources: {
+      health: {
+        max: Math.floor(baseEnemy.resources.health.max * level ** 1.3),
+        current: Math.floor(baseEnemy.resources.health.max * level ** 1.3),
+      },
+      energy: {
+        max: baseEnemy.resources.energy.max + level * energyScale,
+        current: baseEnemy.resources.energy.max + level * energyScale,
+      },
+    },
+    goldRange: [
+      baseEnemy.goldRange[0] + level * gScale,
+      baseEnemy.goldRange[1] + level * gScale,
+    ],
+    expGain: Math.floor(baseEnemy.expGain * level ** 1.2),
+  };
 }

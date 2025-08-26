@@ -13,7 +13,7 @@ export function continueCombat(socket: Socket<AppEvents>, combatId: string) {
     return emitError(socket, "invalid_status", "continue_invalid_combat_status");
   }
 
-  const enemy = SpawnService.getLocationEnemy(combat.location);
+  const enemy = SpawnService.getLocationEnemy(combat.location, combat.player.level);
   if (!enemy) {
     return emitError(socket, "no_enemy", "no_enemy_found");
   }

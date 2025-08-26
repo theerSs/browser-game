@@ -36,19 +36,29 @@ export class PlayerCharacterEntity extends CharacterEntity {
 
   levelUp(expGained: number) {
     const experience = this.state.experience;
+    const resources = this.state.resources;
+    const stats = this.state.stats;
 
-    const missingExp = experience.toLevelUp - experience.current;
-    if (missingExp <= expGained) {
+    const totalExp = experience.current + expGained;
+
+    if (totalExp >= experience.toLevelUp) {
       this.state.level++;
-      this.state.experience.current = expGained - missingExp;
-      this.state.experience.toLevelUp *= 2;
-      this.state.resources.health.max *= 2;
-      this.state.resources.health.current = this.state.resources.health.max;
-      this.state.resources.energy.max *= 2;
-      this.state.resources.energy.current = this.state.resources.energy.max;
+
+      experience.current = totalExp - experience.toLevelUp;
+      experience.toLevelUp = Math.floor(experience.toLevelUp * 1.5);
+
+      stats.damage[0] += this.state.level * 1.2;
+      stats.damage[1] += this.state.level * 1.2;
+      stats.defence += Math.floor(this.state.level / 2);
+      stats.dex += Math.floor(this.state.level / 3);
+
+      resources.health.max = Math.floor(resources.health.max * 1.2);
+      resources.health.current = resources.health.max;
+      resources.energy.max += this.state.level * 1.1;
+      resources.energy.current = resources.energy.max;
     }
     else {
-      this.state.experience.current += expGained;
+      experience.current = totalExp;
     }
   }
 

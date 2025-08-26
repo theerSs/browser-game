@@ -23,15 +23,14 @@ export async function startCombat(socket: Socket<AppEvents>, locationId: CombatL
     return emitError(socket, "invalid_location", "invalid_combat_location");
   }
 
-  const enemy = SpawnService.getLocationEnemy(locationId);
-  if (!enemy) {
-    return emitError(socket, "no_enemy", "no_enemy_found");
-  }
-
   const character = await CharacterRepository.getCharacterById(characterId);
-
   if (!character) {
     return emitError(socket, "no_player", "no_player_found");
+  }
+
+  const enemy = SpawnService.getLocationEnemy(locationId, character.level);
+  if (!enemy) {
+    return emitError(socket, "no_enemy", "no_enemy_found");
   }
 
   const combat = CombatCacheService.createCombat(enemy, locationId, character);
