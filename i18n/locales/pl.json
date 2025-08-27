@@ -31,5 +31,8 @@
   "create_new_character": "Utwórz nową postać",
   "character_details_loading_error": "Błąd podczas ładowania szczegółów postaci",
   "character_creation_error": "Błąd podczas tworzenia postaci",
-  "character_deletion_error": "Błąd podczas usuwania postaci"
+  "character_deletion_error": "Błąd podczas usuwania postaci",
+  "damage": "Obrażenia",
+  "dex": "Zwinność",
+  "defence": "Obrona"
 }

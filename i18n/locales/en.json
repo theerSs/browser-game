@@ -31,5 +31,8 @@
   "create_new_character": "Create new character",
   "character_details_loading_error": "Error during character details loading",
   "character_creation_error": "Error during character creation",
-  "character_deletion_error": "Error during charactere delete"
+  "character_deletion_error": "Error during charactere delete",
+  "damage": "Damage",
+  "dex": "Dexterity",
+  "defence": "Defence"
 }
