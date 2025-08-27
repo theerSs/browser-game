@@ -1,6 +1,7 @@
 {
   "character": "Bohater",
   "expedition": "Wyprawa",
+  "player_character": "Postać gracza",
   "shop": "Sklep",
   "sign_out": "Wyloguj",
   "sign_in_with_github": "Zaloguj się z Github",

@@ -47,14 +47,14 @@ export class PlayerCharacterEntity extends CharacterEntity {
       experience.current = totalExp - experience.toLevelUp;
       experience.toLevelUp = Math.floor(experience.toLevelUp * 1.5);
 
-      stats.damage[0] += this.state.level * 1.2;
-      stats.damage[1] += this.state.level * 1.2;
+      stats.damage[0] += Math.floor(this.state.level * 1.2);
+      stats.damage[1] += Math.floor(this.state.level * 1.2);
       stats.defence += Math.floor(this.state.level / 2);
       stats.dex += Math.floor(this.state.level / 3);
 
       resources.health.max = Math.floor(resources.health.max * 1.2);
       resources.health.current = resources.health.max;
-      resources.energy.max += this.state.level * 1.1;
+      resources.energy.max += Math.floor(this.state.level * 1.1);
       resources.energy.current = resources.energy.max;
     }
     else {

@@ -1,6 +1,7 @@
 {
   "character": "Character",
   "expedition": "Expedition",
+  "player_character": "Player character",
   "shop": "Shop",
   "sign_out": "Sign Out",
   "sign_in_with_github": "Sign In With Github",
