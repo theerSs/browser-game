@@ -1,6 +1,8 @@
 import { CharacterEntity } from "../domain";
 
 export function doAttack(state: CombatState) {
+  if (!state.enemy)
+    return;
   const player = new CharacterEntity(state.player);
   const enemy = new CharacterEntity(state.enemy);
 

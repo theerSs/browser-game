@@ -4,12 +4,22 @@ import { useCombat, useCombatFormatting } from "./composables";
 
 const { combatState, handleCombatAction, continueCombat, goBackToCity } = useCombat();
 const { damageRange, dodgeChance, defenceValue } = useCombatFormatting(combatState);
+
+const playerCanStop = computed(() => {
+  if (!combatState.value) {
+    return false;
+  }
+
+  const { status, enemiesFought } = combatState.value;
+
+  return status === "victory" && enemiesFought > 0 && enemiesFought % 5 === 0;
+});
 </script>
 
 <template>
   <div v-if="combatState" class="flex gap-4">
     <BaseModal
-      v-if="combatState.status === 'victory'"
+      v-if="playerCanStop"
       :title="$t('should_continue_title')"
       :description="$t('should_continue_desc')"
       :close-label="$t('return_to_city')"
@@ -34,6 +44,7 @@ const { damageRange, dodgeChance, defenceValue } = useCombatFormatting(combatSta
       />
     </div>
     <CharacterPanel
+      v-if="combatState.enemy"
       class="flex-1 h-full"
       :name="combatState.enemy.name"
       :image="combatState.enemy.image"

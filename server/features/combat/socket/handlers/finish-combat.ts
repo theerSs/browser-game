@@ -2,8 +2,7 @@ import type { Socket } from "socket.io";
 
 import { CharacterService } from "~~/server/services";
 
-import { PlayerCharacterEntity } from "../../domain";
-import { CombatCacheService } from "../../services";
+import { CombatCacheService, CombatService } from "../../services";
 import { emitError } from "../utils";
 
 export async function finishCombat(socket: Socket<AppEvents>, combatId: string) {
@@ -17,17 +16,9 @@ export async function finishCombat(socket: Socket<AppEvents>, combatId: string) 
   }
 
   CombatCacheService.removeCombat(combatId);
-  const { player, rewards } = combat;
-
-  const playerCharacter = new PlayerCharacterEntity(player);
-  if (rewards.experience > 0) {
-    playerCharacter.levelUp(rewards.experience);
-  }
-  if (rewards.gold > 0) {
-    playerCharacter.addGold(rewards.gold);
-  }
+  CombatService.handleCombatFinish(combat);
   const characterService = new CharacterService(socket);
-  await characterService.updateCharacter(player);
+  await characterService.updateCharacter(combat.player);
 
   socket.emit("combat:closed");
 }

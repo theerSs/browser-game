@@ -1,6 +1,8 @@
 import { CharacterEntity, PlayerCharacterEntity } from "../domain";
 
 export function doDodge(state: CombatState) {
+  if (!state.enemy)
+    return;
   const player = new PlayerCharacterEntity(state.player);
   const enemy = new CharacterEntity(state.enemy);
 

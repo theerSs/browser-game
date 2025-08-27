@@ -1,6 +1,6 @@
 import type { Socket } from "socket.io";
 
-import { CombatCacheService, SpawnService } from "../../services";
+import { CombatCacheService, CombatService } from "../../services";
 import { emitError } from "../utils";
 
 export function continueCombat(socket: Socket<AppEvents>, combatId: string) {
@@ -13,13 +13,10 @@ export function continueCombat(socket: Socket<AppEvents>, combatId: string) {
     return emitError(socket, "invalid_status", "continue_invalid_combat_status");
   }
 
-  const enemy = SpawnService.getLocationEnemy(combat.location, combat.player.level);
-  if (!enemy) {
+  const enemyUpdated = CombatService.updateCombatEnemy(combat);
+  if (!enemyUpdated) {
     return emitError(socket, "no_enemy", "no_enemy_found");
   }
-
-  combat.enemy = enemy;
-  combat.status = "pending";
 
   socket.emit("combat:update", combat);
 }

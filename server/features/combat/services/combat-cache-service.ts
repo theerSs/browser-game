@@ -5,15 +5,16 @@ import { v4 as uuidv4 } from "uuid";
 const COMBAT_CACHE = new Map<string, CombatState>();
 
 export class CombatCacheService {
-  static createCombat(enemy: EnemyCharacter, locationId: CombatLocation, player: PlayerCharacter): CombatState {
+  static createCombat(locationId: CombatLocation, player: PlayerCharacter): CombatState {
     const combatId = uuidv4();
 
     const combat: CombatState = {
       id: combatId,
       status: "pending",
       location: locationId,
-      enemy,
+      enemy: null,
       player,
+      enemiesFought: 0,
       rewards: {
         experience: 0,
         gold: 0,

@@ -10,8 +10,9 @@ export type CombatState = {
   status: CombatStatus;
   location: CombatLocation;
   player: PlayerCharacter;
-  enemy: EnemyCharacter;
+  enemy: EnemyCharacter | null;
   rewards: Rewards;
+  enemiesFought: number;
 };
 
 export type Rewards = {

@@ -30,9 +30,6 @@ export async function combatAction(socket: Socket<AppEvents>, combatId: string, 
     if (combat.status === "defeat") {
       handleCombatDefeat(combat, socket);
     }
-    else if (combat.status === "victory") {
-      CombatService.updateRewards(combat);
-    }
     socket.emit("combat:update", combat);
   }
   else {
