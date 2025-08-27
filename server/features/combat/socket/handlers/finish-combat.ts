@@ -1,11 +1,15 @@
-import type { Socket } from "socket.io";
+import type { CombatSocket } from "~~/shared/types";
 
 import { CharacterService } from "~~/server/services";
 
 import { CombatCacheService, CombatService } from "../../services";
 import { emitError } from "../utils";
 
-export async function finishCombat(socket: Socket<AppEvents>, combatId: string) {
+export async function finishCombat(socket: CombatSocket) {
+  const combatId = socket.data.combatId;
+  if (!combatId) {
+    return emitError(socket, "not_found", "combat_not_found");
+  }
   const combat = CombatCacheService.getCombat(combatId);
   if (!combat) {
     return emitError(socket, "not_found", "combat_not_found");

@@ -1,5 +1,5 @@
-export function useStatsList(stats: CharacterStats) {
-  const statsList = computed(() => Object.entries(stats).map(([key, value]) => ({
+export function useStatsList(stats: Ref<CharacterStats>) {
+  const statsList = computed(() => Object.entries(stats.value).map(([key, value]) => ({
     name: key,
     value: Array.isArray(value) ? getValueRange(value) : value,
   })));

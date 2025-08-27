@@ -1,10 +1,10 @@
-import type { Socket } from "socket.io";
+import type { CharacterSocket } from "~~/shared/types";
 
 import { CharacterRepository } from "../repositories";
 
 export class CharacterService {
   constructor(
-    private socket: Socket<AppEvents>,
+    private socket: CharacterSocket,
     private repo = CharacterRepository,
   ) {}
 

@@ -35,5 +35,9 @@
   "character_deletion_error": "Error during charactere delete",
   "damage": "Damage",
   "dex": "Dexterity",
-  "defence": "Defence"
+  "defence": "Defence",
+  "modifiers": "Modifiers",
+  "requirements": "Requirements",
+  "level": "Level",
+  "value": "Value"
 }

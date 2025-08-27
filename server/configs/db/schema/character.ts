@@ -1,5 +1,6 @@
-import type { Experience } from "~~/shared/types";
+import type { Experience, Inventory } from "~~/shared/types";
 
+import { generateItem } from "~~/shared/const/items/item";
 import {
   int,
   sqliteTable,
@@ -9,6 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { user } from "./auth";
 
+const emptyInventory = Array.from({ length: 18 }) as Inventory["items"];
+emptyInventory[0] = generateItem();
 export const character = sqliteTable("character", {
   id: text("id").default(uuidv4()).primaryKey(),
   image: text("image").default("player").notNull(),
@@ -43,8 +46,8 @@ export const character = sqliteTable("character", {
         healAmount: 0.1,
       },
     },
-    gold: 0,
-    items: [],
+    gold: 100,
+    items: emptyInventory,
   }).notNull(),
   userId: int().notNull().references(() => user.id),
 });

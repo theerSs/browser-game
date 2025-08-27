@@ -5,4 +5,4 @@ export * from "./combat-events";
 export * from "./enemy";
 export * from "./map-location";
 export * from "./player";
-export * from "./socket-events";
+export * from "./sockets";

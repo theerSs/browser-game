@@ -16,7 +16,7 @@ const characterStore = useCharacterStore();
         :resources="characterStore.character.resources"
         :img-alt="$t('player_character')"
       />
-      <StatsPanel :experience="characterStore.character.experience" :stats="characterStore.character.stats" />
+      <StatsPanel :stats="characterStore.character.stats" />
     </div>
     <Inventory :inventory="characterStore.character.inventory" class="flex-1" />
   </div>

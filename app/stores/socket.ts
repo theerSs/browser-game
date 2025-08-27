@@ -2,8 +2,10 @@ import type { Socket } from "socket.io-client";
 
 import { io } from "socket.io-client";
 
+import type { SocketEvents } from "~/types";
+
 export const useSocketStore = defineStore("useSocketStore", () => {
-  const socket = ref<Socket<AppEvents> | null>(null);
+  const socket = ref<Socket<SocketEvents> | null>(null);
   const transport = ref<"N/A" | string>("N/A");
 
   function connect() {

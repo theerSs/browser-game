@@ -1,13 +1,14 @@
 import type { CombatLocation } from "~~/shared/enums";
-import type { Server, Socket } from "socket.io";
+import type { CombatSocket } from "~~/shared/types";
+import type { Server } from "socket.io";
 
 import { combatAction, continueCombat, finishCombat, startCombat } from "./handlers";
 
 export default function combatHandler(io: Server) {
-  io.on("connection", (socket: Socket<AppEvents>) => {
+  io.on("connection", (socket: CombatSocket) => {
     socket.on("combat:start", (locationId: CombatLocation, characterId: PlayerCharacter["id"]) => startCombat(socket, locationId, characterId));
-    socket.on("combat:action", (combatId: string, action: CombatAction) => combatAction(socket, combatId, action));
-    socket.on("combat:finish", (combatId: string) => finishCombat(socket, combatId));
-    socket.on("combat:continue", (combatId: string) => continueCombat(socket, combatId));
+    socket.on("combat:action", (action: CombatAction) => combatAction(socket, action));
+    socket.on("combat:finish", () => finishCombat(socket));
+    socket.on("combat:continue", () => continueCombat(socket));
   });
 }

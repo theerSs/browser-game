@@ -35,5 +35,9 @@
   "character_deletion_error": "Błąd podczas usuwania postaci",
   "damage": "Obrażenia",
   "dex": "Zwinność",
-  "defence": "Obrona"
+  "defence": "Obrona",
+  "modifiers": "Modyfikatory",
+  "requirements": "Wymagania",
+  "level": "Poziom",
+  "value": "Wartość"
 }

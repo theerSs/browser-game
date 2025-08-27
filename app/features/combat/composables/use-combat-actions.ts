@@ -12,19 +12,19 @@ export function useCombatActions(combatState: Ref<CombatState | null>) {
   function handleCombatAction(action: CombatAction) {
     if (!combatState.value)
       return handleNoActiveCombat();
-    socketStore.socket?.emit("combat:action", combatState.value.id, action);
+    socketStore.socket?.emit("combat:action", action);
   }
 
   function continueCombat() {
     if (!combatState.value)
       return handleNoActiveCombat();
-    socketStore.socket?.emit("combat:continue", combatState.value.id);
+    socketStore.socket?.emit("combat:continue");
   }
 
   function goBackToCity() {
     if (!combatState.value)
       return handleNoActiveCombat();
-    socketStore.socket?.emit("combat:finish", combatState.value.id);
+    socketStore.socket?.emit("combat:finish");
   }
 
   return { handleCombatAction, continueCombat, goBackToCity };

@@ -32,7 +32,7 @@ const ENEMIES: Record<Enemy, EnemyCharacter> = {
     },
     resources: {
       energy: { current: 8, max: 8 },
-      health: { current: 25, max: 25 },
+      health: { current: 20, max: 20 },
     },
     goldRange: [5, 30],
     expGain: 25,
