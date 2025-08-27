@@ -12,10 +12,11 @@ const characterStore = useCharacterStore();
         image="player"
         :level="characterStore.character.level"
         :name="characterStore.character.name"
+        :experience="characterStore.character.experience"
         :resources="characterStore.character.resources"
         img-alt="Player character"
       />
-      <StatsPanel :stats="characterStore.character.stats" />
+      <StatsPanel :experience="characterStore.character.experience" :stats="characterStore.character.stats" />
     </div>
     <Inventory :inventory="characterStore.character.inventory" class="flex-1" />
   </div>

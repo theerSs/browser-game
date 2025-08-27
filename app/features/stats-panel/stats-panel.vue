@@ -4,6 +4,7 @@ import { useStatsList } from "./composables/use-stats-list";
 
 const props = defineProps<{
   stats: CharacterStats;
+  experience: Experience;
 }>();
 
 const { statsList } = useStatsList(props.stats);

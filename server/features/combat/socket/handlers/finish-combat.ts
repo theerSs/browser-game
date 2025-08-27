@@ -20,8 +20,12 @@ export async function finishCombat(socket: Socket<AppEvents>, combatId: string) 
   const { player, rewards } = combat;
 
   const playerCharacter = new PlayerCharacterEntity(player);
-  playerCharacter.levelUp(rewards.experience);
-  playerCharacter.addGold(rewards.gold);
+  if (rewards.experience > 0) {
+    playerCharacter.levelUp(rewards.experience);
+  }
+  if (rewards.gold > 0) {
+    playerCharacter.addGold(rewards.gold);
+  }
   const characterService = new CharacterService(socket);
   await characterService.updateCharacter(player);
 

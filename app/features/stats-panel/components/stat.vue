@@ -8,6 +8,6 @@ const props = defineProps<{
 <template>
   <div class="flex items-center gap-4">
     <span class="w-24 truncate font-bold">{{ $t(props.name) }}:</span>
-    <span class="text-right">{{ props.value }}</span>
+    <span class="italic">{{ props.value }}</span>
   </div>
 </template>

@@ -26,6 +26,8 @@ export class CharacterRepository {
       level: data.level,
       resources: data.resources,
       inventory: data.inventory,
+      stats: data.stats,
+      experience: data.experience,
     }).where(eq(character.id, data.id));
 
     return result.rowsAffected > 0;

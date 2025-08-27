@@ -10,12 +10,12 @@ const props = defineProps<{
     <BaseIconWithLabel
       icon-name="tabler:flask-2-filled"
       :label="props.potions.health.amount"
-      class="text-green-500"
+      class="text-success"
     />
     <BaseIconWithLabel
       icon-name="tabler:flask-filled"
       :label="props.potions.energy.amount"
-      class="text-blue-500"
+      class="text-info"
     />
     <BaseIconWithLabel
       icon-name="tabler:coins"

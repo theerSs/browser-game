@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Character } from "#imports";
+import type { Character, Experience } from "#imports";
 
-const props = defineProps<Pick<Character, "image" | "level" | "name" | "resources"> & { imgAlt: string }>();
+const props = defineProps<Pick<Character, "image" | "level" | "name" | "resources"> & { imgAlt: string; experience?: Experience }>();
 </script>
 
 <template>
@@ -13,7 +13,8 @@ const props = defineProps<Pick<Character, "image" | "level" | "name" | "resource
         :alt="props.imgAlt"
       >
     </figure>
-    <div class="card-body items-center">
+    <div class="card-body items-center pt-0">
+      <CharacterExpBar v-if="props.experience" :experience="props.experience" />
       <h2 class="card-title">
         {{ $t(props.name) }} - {{ props.level }}
       </h2>

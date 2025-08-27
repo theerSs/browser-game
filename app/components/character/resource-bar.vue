@@ -42,7 +42,7 @@ watch(() => props.resource.current, (newValue, oldValue) => {
     <progress
       :class="{
         'progress-success': props.resourceType === 'health',
-        'progress-warning': props.resourceType === 'energy',
+        'progress-info': props.resourceType === 'energy',
       }"
       class="progress flex-1 h-3"
       :value="props.resource.current"
